@@ -1,0 +1,9 @@
+# Local deployment checkout and reproducible release bundles
+/spirit-publish/
+/spirit-deployment.tar
+/spirit-website.zip
+node_modules/
+.env
+.env.*
+!.env.example
+*.log

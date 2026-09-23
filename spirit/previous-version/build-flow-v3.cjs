@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path');
+const dir=path.join(__dirname,'dist');
+let html=fs.readFileSync(path.join(dir,'cinema.html'),'utf8');
+html=html.replace('cinema.css?v=2','cinema.css?v=3').replace('<script src="cinema-engine.js?v=2" defer></script><script src="cinema.js?v=2" defer></script>','<link rel="stylesheet" href="title-v3.css?v=3"><link rel="stylesheet" href="flow-v3.css?v=3"><script src="cinema-engine.js?v=3" defer></script><script src="title-v3.js?v=3" defer></script><script src="flow-v3.js?v=3" defer></script>');
+html=html.replace(/<section id="entry"[\s\S]*?<\/section>/,`<section id="entry" role="dialog" aria-modal="true" aria-label="Spirit opening sequence"><button id="skip-entry">Skip intro ↗</button><div class="entry-center"><div id="opening-title" data-spirit-title data-title-manual="true" aria-label="Spirit"></div><div class="loading" role="progressbar" aria-label="Opening sequence" aria-valuemin="1" aria-valuemax="100" aria-valuenow="1"><i><b id="load-bar"></b></i><span id="load-label">ENTERING SPIRIT</span><span id="load-number">1%</span></div><div class="entry-choices"><button id="enter-sound" class="primary">Enter with sound ↗</button><button id="enter-silent" class="text-link">Enter silently</button></div><p>Headphones recommended</p></div></section>`);
+html=html.replace(/<header>[\s\S]*?<\/header>/,`<header><nav aria-label="Main navigation"><a href="#film">The film</a><a href="#cast">Cast</a><a href="#theatre">Theatre</a><a href="#gallery">Gallery</a></nav><div class="tools"><button id="audio-toggle" aria-pressed="false" aria-label="Play Spirit soundtrack"><span class="meter" aria-hidden="true"><i></i><i></i><i></i></span><span id="audio-label">Sound off</span></button><button id="menu-open" aria-expanded="false" aria-label="Open chapters"><span class="hamburger" aria-hidden="true"></span>Menu</button></div><a href="#home" class="wordmark" aria-label="Spirit home"><span data-spirit-title aria-hidden="true"></span></a></header>`);
+html=html.replace(/href="#\/"/g,'href="#home"').replace(/href="#\/(\w+)"/g,'href="#$1"');
+html=html.replace('<div id="shutter" aria-hidden="true"><div class="logo"><img src="assets/title-master.jpg" alt=""></div></div>','<div class="scroll-progress" aria-hidden="true"></div>');
+html=html.replace(/<a href="#home" class="logo" aria-label="Spirit home"><img src="assets\/title-master.jpg" alt="Spirit"><\/a>/g,'<a href="#home" class="footer-logo" aria-label="Spirit home"><span data-spirit-title aria-hidden="true"></span></a>');
+fs.writeFileSync(path.join(dir,'index.html'),html);fs.writeFileSync(path.join(dir,'cinema.html'),html);
+const old=fs.readFileSync(path.join(dir,'cinema.js'),'utf8');
+// Keep the already verified player controls while replacing the page router.
+const audioFunctions=old.slice(old.indexOf('function initAudio()'),old.indexOf('function leaveEntry('));
+fs.writeFileSync(path.join(dir,'flow-audio-v3.fragment'),audioFunctions);
