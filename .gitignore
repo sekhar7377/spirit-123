@@ -7,3 +7,6 @@ node_modules/
 .env.*
 !.env.example
 *.log
+/.video-tools/
+/spirit/opening/work/
+__pycache__/
