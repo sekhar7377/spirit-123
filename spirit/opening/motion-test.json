@@ -1,0 +1,27 @@
+{
+  "job_id": "0ffb8478-e47f-46df-994e-c82863251c5d",
+  "created": "2026-09-24",
+  "status": "submitted",
+  "description": "User-authorized free 480p motion-transfer attempt. Uses supplied entrance video and two police-look image references. Not an official production.",
+  "params": {
+    "model": "hf_mult_motion_control",
+    "resolution": "480p",
+    "count": 1,
+    "use_free_gens": true,
+    "medias": [
+      {
+        "role": "video",
+        "value": "bf4cebc0-c12b-4480-8417-64d4195e8b57"
+      },
+      {
+        "role": "image",
+        "value": "21f54c52-50c4-40e1-9cd2-53f9a1759d5e"
+      },
+      {
+        "role": "image",
+        "value": "a02f0210-103b-4c60-b531-17da1fbd628f"
+      }
+    ],
+    "prompt": "Create a photoreal moving cinematic fan-concept introduction of actor Prabhas in a fitted khaki Indian police uniform. Transfer the natural body movement, sunglasses gesture, controlled entrance, head motion and low-angle camera movement from the driving video. Preserve Prabhas recognizable facial identity from the supplied reference images: swept-back dark hair, strong jaw, groomed beard and moustache, intense eyes. Lean athletic muscular physique, broad shoulders and narrow waist, naturally proportioned strong forearms and hands, rolled khaki sleeves, realistic fabric tension, belt and two polished shoulder stars. Keep uniform consistent throughout; do not retain the driving video's civilian jacket. Natural continuous human motion, breathing, cloth movement, plausible hand anatomy and fingers. Restrained powerful expression and swagger, no smile or exaggerated acting. Dramatic dark police-station setting, warm hard sidelighting, deep shadows, gentle haze, subtle moving background, grounded cinematic contrast. Use the reference images only for appearance, never reproduce them as flat cards. Ignore and exclude ALL reference screenshot interfaces, captions, watermarks, usernames, text, title overlays and social-media outro. No words or logos in the result. Finish on the moving police hero rather than the reference video's watermark end card. No blood, gore or cartoon look. This is a genuine motion transfer test, not a pan or zoom over a still image."
+  }
+}
