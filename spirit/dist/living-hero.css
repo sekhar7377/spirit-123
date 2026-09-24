@@ -1,0 +1,15 @@
+.cigarette-life{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none}
+#entry{background:#eee9dd;color:#620817}
+#entry:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23857965' filter='url(%23n)' opacity='.35' d='M0 0h240v240H0z'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+#entry:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 42% 38%,#fff6,transparent 65%,#8e7c5919)}
+#entry .entry-center{z-index:1}
+#entry #skip-entry{color:#683e3c}
+#opening-title .st-lettering{filter:drop-shadow(0 1px 1px #39000a55)}
+#opening-title .st-lettering g[mask]>rect:first-child{fill:#800c1d}
+#opening-title canvas{filter:sepia(1) saturate(5) hue-rotate(310deg) brightness(.48)}
+#entry .loading,#entry .entry-center>p{color:#73544d}
+#entry .loading i{background:#cfc1b5}
+#entry .loading b{background:linear-gradient(90deg,#580513,#a81528);box-shadow:0 1px 5px #8a12252b}
+#entry .loading b:after{background:#9c1728;box-shadow:none}
+#entry .entry-choices .primary{background:#800c1d;color:#faf3e8}
+#entry .entry-choices .text-link{color:#700d1b}
