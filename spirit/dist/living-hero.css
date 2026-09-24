@@ -6,7 +6,7 @@
 #entry #skip-entry{color:#683e3c}
 #opening-title .st-lettering{filter:drop-shadow(0 1px 1px #39000a55)}
 #opening-title .st-lettering g[mask]>rect:first-child{fill:#800c1d}
-#opening-title canvas{filter:sepia(1) saturate(5) hue-rotate(310deg) brightness(.48)}
+#opening-title canvas{filter:none}
 #entry .loading,#entry .entry-center>p{color:#73544d}
 #entry .loading i{background:#cfc1b5}
 #entry .loading b{background:linear-gradient(90deg,#580513,#a81528);box-shadow:0 1px 5px #8a12252b}

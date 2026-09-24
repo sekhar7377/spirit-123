@@ -4,8 +4,10 @@ The crimson Spirit opening sits on an ivory film-photo mosaic. Twenty-five relea
 
 `dist/assets/journey/manifest.json` records each title, year, source page and original image URL. Sources: https://prabhas.in/movies, IMDb's Mr. Perfect poster, and Sun NXT's Rebel artwork. Copyright remains with the respective owners. The fan-site catalog is used for imagery, not as an official studio source.
 
-`dist/journey.js` renders the ordered archive into 240 photo cells and reuses that texture on two independently drifting planes. Warm monochrome grading, an ivory center veil and a protected control area keep the title dominant. Animation pauses when the entry closes or the document is hidden and respects reduced motion. Failed image loads fall back to the ivory opening.
+`dist/journey.js` renders 26 primary portraits and 156 smaller satellite frames as a growing constellation, with fine copper connections, traveling light pulses and a slow pullback. Warm monochrome grading, an ivory center veil and a protected control area keep the title dominant. Animation pauses when the entry closes or the document is hidden and respects reduced motion. Failed image loads fall back to the ivory opening.
 
-`dist/living-hero.js` maps a subtle ember, lighter flame and smoke to normalized coordinates in the first hero image, accounting for object-fit, object-position and transformed bounds. The effect disappears on the second image. Reduced motion keeps a static glow without moving smoke.
+`dist/living-hero.js` maps a subtle ember, lighter flame and smoke to normalized coordinates in the first hero image, accounting for object-fit, object-position and transformed bounds. The hero now contains only the Prabhas photograph; gallery and cast images remain available. Reduced motion keeps a static glow without moving smoke.
 
 QA: desktop and 390px mobile opening and hero visually checked; no horizontal overflow in the mobile check; browser error log empty; JavaScript syntax and Git whitespace checks passed.
+
+Revision 7: opening stars restored to original metallic silver; motion reference is the supplied September 25 video of growing connected clusters. No source video UI, captions or audio are incorporated.
