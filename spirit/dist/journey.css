@@ -18,3 +18,5 @@
 @media(max-width:600px){#entry .opening-director{font-size:8px}}
 /* Matte archive: protect only the title, without a bright wash over the outer photos. */
 #entry:after{background:radial-gradient(ellipse at 50% 36%,#eee9ddbc 0%,#eee9dd9e 19%,#eee9dd55 34%,transparent 57%),linear-gradient(0deg,#eee9dddc,transparent 19%)}
+/* Clear centre and restrained matte imagery keep the Spirit mark dominant. */
+#entry:after{background:radial-gradient(ellipse at 50% 36%,#eee9dde8 0%,#eee9ddc9 24%,#eee9dd77 42%,transparent 65%),linear-gradient(0deg,#eee9dddc,transparent 19%)}
