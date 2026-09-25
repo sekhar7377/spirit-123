@@ -1,22 +1,15 @@
 #entry{isolation:isolate;overflow:hidden}
-.journey-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .8s ease;z-index:0;filter:none}
-#entry.journey-ready .journey-canvas{opacity:.88}
+.journey-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 2.4s ease;z-index:0;filter:blur(.35px)}
+#entry.journey-ready .journey-canvas{opacity:.67}
 #entry:before{z-index:2;opacity:.17}
-#entry:after{z-index:1;background:radial-gradient(ellipse at 50% 43%,#eee9ddbc 0%,#eee9dd9e 20%,#eee9dd66 40%,#eee9dd2b 68%,#eee9dd33 100%),linear-gradient(0deg,#eee9ddf5,transparent 25%,transparent 80%,#eee9dd88)}
+#entry:after{z-index:1;background:radial-gradient(ellipse at 50% 43%,#eee9ddfa 0%,#eee9ddeb 23%,#eee9ddb8 43%,#eee9dd66 68%,#eee9dd55 100%),linear-gradient(0deg,#eee9ddf5,transparent 25%,transparent 80%,#eee9dd88)}
 #entry .entry-center{z-index:3}
 #entry #skip-entry{z-index:4;background:#eee9ddc9;border-radius:2px;padding:9px 12px}
 #entry .entry-choices .text-link{background:#eee9ddbd;padding:12px 16px}
-@media(max-width:600px){#entry.journey-ready .journey-canvas{opacity:.95}#entry:after{background:radial-gradient(ellipse at 50% 42%,#eee9ddaa 0%,#eee9dd88 25%,#eee9dd22 62%,#eee9dd22 100%),linear-gradient(0deg,#eee9ddf0,transparent 40%)}}
+@media(max-width:600px){#entry.journey-ready .journey-canvas{opacity:.55}#entry:after{background:radial-gradient(ellipse at 50% 42%,#eee9ddf7 0%,#eee9dde8 30%,#eee9dd9e 62%,#eee9dd85 100%),linear-gradient(0deg,#eee9ddf0,transparent 40%)}}
 @media(prefers-reduced-motion:reduce){.journey-canvas{transition:none}}
-/* Preserve the title geometry; use the existing gap for a discreet director credit. */
 #entry .opening-director{height:0;position:relative;top:6px;font-size:9px;line-height:16px;letter-spacing:.16em;text-transform:uppercase;color:#766556}
 #entry .opening-director strong{font-weight:600;color:#604637;margin-left:5px}
-#entry.journey-ready .journey-canvas{opacity:1}
-#entry:after{background:radial-gradient(ellipse at 50% 43%,#eee9ddbc 0%,#eee9dd9e 20%,#eee9dd45 40%,#eee9dd12 68%,#eee9dd18 100%),linear-gradient(0deg,#eee9ddf5,transparent 25%,transparent 80%,#eee9dd55)}
 @media(max-width:600px){#entry .opening-director{font-size:8px;letter-spacing:.1em;top:9px}}
 #entry .opening-director{width:max-content;max-width:100%;margin-inline:auto;background:#eee9ddd9;padding-inline:8px;font-size:10px}
 @media(max-width:600px){#entry .opening-director{font-size:8px}}
-/* Matte archive: protect only the title, without a bright wash over the outer photos. */
-#entry:after{background:radial-gradient(ellipse at 50% 36%,#eee9ddbc 0%,#eee9dd9e 19%,#eee9dd55 34%,transparent 57%),linear-gradient(0deg,#eee9dddc,transparent 19%)}
-/* Clear centre and restrained matte imagery keep the Spirit mark dominant. */
-#entry:after{background:radial-gradient(ellipse at 50% 36%,#eee9dde8 0%,#eee9ddc9 24%,#eee9dd77 42%,transparent 65%),linear-gradient(0deg,#eee9dddc,transparent 19%)}
