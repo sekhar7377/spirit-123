@@ -16,3 +16,5 @@
 @media(max-width:600px){#entry .opening-director{font-size:8px;letter-spacing:.1em;top:9px}}
 #entry .opening-director{width:max-content;max-width:100%;margin-inline:auto;background:#eee9ddd9;padding-inline:8px;font-size:10px}
 @media(max-width:600px){#entry .opening-director{font-size:8px}}
+/* Matte archive: protect only the title, without a bright wash over the outer photos. */
+#entry:after{background:radial-gradient(ellipse at 50% 36%,#eee9ddbc 0%,#eee9dd9e 19%,#eee9dd55 34%,transparent 57%),linear-gradient(0deg,#eee9dddc,transparent 19%)}
