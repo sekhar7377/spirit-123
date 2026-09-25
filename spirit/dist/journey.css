@@ -8,3 +8,11 @@
 #entry .entry-choices .text-link{background:#eee9ddbd;padding:12px 16px}
 @media(max-width:600px){#entry.journey-ready .journey-canvas{opacity:.95}#entry:after{background:radial-gradient(ellipse at 50% 42%,#eee9ddaa 0%,#eee9dd88 25%,#eee9dd22 62%,#eee9dd22 100%),linear-gradient(0deg,#eee9ddf0,transparent 40%)}}
 @media(prefers-reduced-motion:reduce){.journey-canvas{transition:none}}
+/* Preserve the title geometry; use the existing gap for a discreet director credit. */
+#entry .opening-director{height:0;position:relative;top:6px;font-size:9px;line-height:16px;letter-spacing:.16em;text-transform:uppercase;color:#766556}
+#entry .opening-director strong{font-weight:600;color:#604637;margin-left:5px}
+#entry.journey-ready .journey-canvas{opacity:1}
+#entry:after{background:radial-gradient(ellipse at 50% 43%,#eee9ddbc 0%,#eee9dd9e 20%,#eee9dd45 40%,#eee9dd12 68%,#eee9dd18 100%),linear-gradient(0deg,#eee9ddf5,transparent 25%,transparent 80%,#eee9dd55)}
+@media(max-width:600px){#entry .opening-director{font-size:8px;letter-spacing:.1em;top:9px}}
+#entry .opening-director{width:max-content;max-width:100%;margin-inline:auto;background:#eee9ddd9;padding-inline:8px;font-size:10px}
+@media(max-width:600px){#entry .opening-director{font-size:8px}}

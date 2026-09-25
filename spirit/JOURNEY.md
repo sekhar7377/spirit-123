@@ -11,3 +11,5 @@ The crimson Spirit opening sits on an ivory film-photo mosaic. Twenty-five relea
 QA: desktop and 390px mobile opening and hero visually checked; no horizontal overflow in the mobile check; browser error log empty; JavaScript syntax and Git whitespace checks passed.
 
 Revision 7: opening stars restored to original metallic silver; motion reference is the supplied September 25 video of growing connected clusters. No source video UI, captions or audio are incorporated.
+
+Spatial detail revision: archive thumbnails are 224 x 280 with less desaturation and stronger contrast. Photos are textured onto perspective-projected 3D planes, sorted by camera depth, with smooth pointer-controlled yaw/pitch and a gentle idle camera drift. Reduced motion disables camera movement. The existing branching structure and title assets remain unchanged. A director credit appears below the title without changing its geometry. Desktop preview checked with no browser errors.
