@@ -16,10 +16,10 @@ process.stdin.on('data',chunk=>{input+=chunk;if(!/[\r\n]/.test(input))return;pro
  const run=(exe,args,cwd=__dirname)=>execFileSync(exe,args,{cwd,env,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
  if(!fs.existsSync(path.join(checkout,'.git'))){run('git',['clone',credential.remote_url,checkout]);run('git',['checkout','-B',credential.branch],checkout);}
  else{run('git',['fetch','origin',credential.branch],checkout);}
- const files=['dist','.openai','README.md','server.cjs','flow-main-v3.js','flow-audio-v3.js','build-v3.cjs','IMAGE-EDITS.md','PROJECT-DIRECTION.md'];
+ const files=['dist','.openai','README.md','server.cjs','flow-main-v3.js','flow-audio-v3.js','build-v3.cjs','IMAGE-EDITS.md','PROJECT-DIRECTION.md','app','components','public','scripts','package.json','package-lock.json','next.config.ts','postcss.config.mjs','tsconfig.json','next-env.d.ts'];
  for(const name of files)fs.cpSync(path.join(source,name),path.join(checkout,name),{recursive:true});
  run('git',['add',...files],checkout);
- if(run('git',['status','--porcelain'],checkout))run('git',['-c','user.name=Codex','-c','user.email=codex@users.noreply.github.com','commit','-m','Create continuous Spirit experience with animated title and cleaned imagery'],checkout);
+ if(run('git',['status','--porcelain'],checkout))run('git',['-c','user.name=Codex','-c','user.email=codex@users.noreply.github.com','commit','-m','Publish Next.js cinematic Spirit experience'],checkout);
  const sha=run('git',['rev-parse','HEAD'],checkout);
  run('git',['push','origin',`HEAD:${credential.branch}`],checkout);
  run('tar',['-cf',archive,'.openai/hosting.json','dist'],checkout);

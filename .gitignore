@@ -10,3 +10,6 @@ node_modules/
 /.video-tools/
 /spirit/opening/work/
 __pycache__/
+.next/
+out/
+*.tsbuildinfo

@@ -1,0 +1,9 @@
+.spirit-title{position:relative;display:block;width:100%;aspect-ratio:1280/720;isolation:isolate;overflow:visible;mix-blend-mode:normal!important}
+.spirit-title svg,.spirit-title canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.spirit-title .st-reveal{position:absolute;inset:0;clip-path:inset(0 100% 0 0);transition:clip-path 2.7s cubic-bezier(.3,.03,.17,1)}
+.spirit-title.title-visible .st-reveal{clip-path:inset(0 0 0 0)}
+.spirit-title[data-title-progress="true"] .st-reveal{clip-path:inset(0 calc(100% - var(--title-reveal,0%)) 0 0);transition:none}
+.spirit-title .st-lettering{filter:drop-shadow(0 2px 5px #0005)}
+.spirit-title .st-blood,.spirit-title .st-drips{display:none}
+.spirit-title.st-reduced .st-reveal{transition:none}
+@media(prefers-reduced-motion:reduce){.spirit-title .st-reveal{transition:none}}
