@@ -17,3 +17,18 @@
 .officer-copy .eyebrow{color:#cfc2ac;font-size:9px}
 .officer-caption{position:absolute;bottom:35px;left:6.25vw;right:6.25vw;display:flex;justify-content:space-between;font-size:8px;letter-spacing:.15em;color:#b5a994}
 @media(max-width:600px){.officer-section{height:85svh;min-height:630px}.officer-section>img{object-position:61% 30%}.officer-shade{background:linear-gradient(0deg,#0c0d0cf2,transparent 70%)}.officer-copy{left:6vw;top:auto;bottom:80px;width:85%}.officer-copy .spirit-mark{width:190px;margin-bottom:8px}.officer-copy h2{font-size:42px}.officer-caption{font-size:6px;bottom:26px;gap:20px}}
+/* GPU portrait chapter: editorial copy at the edge, living portrait at the centre. */
+.particle-officer{height:100svh;min-height:720px;max-height:1200px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 58% 56%,#241d1244,transparent 65%),#060807;isolation:isolate}
+.particle-canvas,.particle-fallback{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none}
+.particle-canvas{opacity:0;transition:opacity 1s;z-index:1}.particle-canvas.is-ready{opacity:1}
+.particle-fallback{object-fit:contain;object-position:55% 50%;opacity:.85;transition:opacity 1s}.particle-fallback.is-hidden{opacity:0}
+.particle-topline{position:absolute;top:40px;left:6.25vw;right:6.25vw;z-index:2;display:flex;justify-content:space-between;font-size:8px;letter-spacing:.16em;color:#9f927c;pointer-events:none}
+.particle-editorial{position:absolute;left:6.25vw;top:37%;z-index:2;max-width:30%;pointer-events:none}
+.particle-editorial .eyebrow{color:#ab9474;font-size:8px}.particle-editorial h2{font-size:clamp(37px,4.2vw,68px);margin-top:23px;color:#e4d7c1;text-shadow:0 3px 25px #000}
+.particle-editorial p{font-size:10px;line-height:1.8;color:#9c927e;max-width:190px;margin-top:25px}
+.particle-bottom{position:absolute;bottom:34px;left:6.25vw;right:6.25vw;z-index:2;display:flex;align-items:end;justify-content:space-between;gap:20px}
+.particle-phase{font:italic 16px Georgia,serif;color:#b6a284;pointer-events:none}.particle-controls{display:flex;align-items:center;gap:25px}.particle-controls button{font-size:9px;padding:12px 0;border-bottom:1px solid #ad987644}.particle-controls>span{font-size:7px;letter-spacing:.1em;color:#766b59}
+@media(max-width:800px){.particle-editorial{top:auto;bottom:110px;max-width:80%}.particle-editorial h2{font-size:39px;margin-top:12px}.particle-editorial p{display:none}.particle-topline{font-size:6px;gap:20px}.particle-bottom{bottom:26px;display:block}.particle-phase{display:none}.particle-controls{gap:23px;justify-content:space-between}.particle-controls button{font-size:8px}.particle-controls>span{font-size:5px;max-width:78px;text-align:right}.particle-officer{height:95svh;min-height:700px}.particle-fallback{object-fit:cover;object-position:56% 50%}}
+@media(prefers-reduced-motion:reduce){.particle-canvas{display:none}.particle-fallback{opacity:.85!important;transition:none}}
+@media(max-width:800px){.particle-fallback{object-position:65% center}}
+.particle-officer{background:#020204}.particle-editorial p,.particle-phase{color:#b9c0cc}.particle-controls>span{color:#9299a5}.particle-controls button{border-color:#ffffff40}.particle-canvas{filter:drop-shadow(0 0 2px #dae5ff35)}
