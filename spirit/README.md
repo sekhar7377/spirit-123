@@ -32,3 +32,6 @@ The officer artwork was regenerated using first-look-clean.png as the physical r
 
 ## Current cosmic direction
 The police section is replaced by prabhas-cosmic-portrait.png: a clean-shaven, short-haired, waist-up celestial fan concept with a bent right arm. The WebGL scene preserves its white constellation network, applies slow chest breathing, renders 1,800 drifting background stars, and retains cursor scattering. This is a real-time browser animation, not an 8K video export or a verified film costume likeness.
+
+## Articulated particle motion
+The live renderer now uses image-derived weighted neck and arm pivots, chest expansion, and coordinated body sway. A parametric rounded-square bottle shares the wrist transform. Portrait particles retain the source likeness; this is a shallow volumetric reconstruction, not a scanned full 3D human. Reduced-motion fallback remains a still. Adaptive particle sizes preserve brightness at lower GPU densities.
