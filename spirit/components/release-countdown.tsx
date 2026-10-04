@@ -20,7 +20,7 @@ export default function ReleaseCountdown() {
  }, []);
  const arrived = time?.every(value => value === 0);
  return <div className="release-clock" aria-label="Countdown to March 5, 2027, midnight India Standard Time">
-  <div className="countdown-units">{['Days', 'Hours', 'Minutes', 'Seconds'].map((label, index) => <div className="countdown-unit" key={label}>
+  <div className="countdown-units">{['Days', 'Hours', 'Minutes', 'Seconds'].map((label, index) => <div className="countdown-unit" key={label}>{index > 0 && <span className="clock-colon" aria-hidden="true"><i/><i/></span>}
    <div className="countdown-number"><AnimatePresence initial={false} mode="popLayout"><motion.span key={time?.[index] ?? 'loading'} initial={reduce ? false : { y: '70%', opacity: 0, rotateX: -55, filter: 'blur(4px)' }} animate={{ y: 0, opacity: 1, rotateX: 0, filter: 'blur(0px)' }} exit={reduce ? { opacity: 0 } : { y: '-65%', opacity: 0, rotateX: 55, filter: 'blur(3px)' }} transition={{ duration: reduce ? 0 : .55, ease: [.22, 1, .36, 1] }}>{time ? String(time[index]).padStart(2, '0') : '—'}</motion.span></AnimatePresence></div>
    <span className="countdown-label">{label}</span>
   </div>)}</div>
