@@ -47,7 +47,8 @@ void main(){
  p+=flow(p*1.7,uTime)*(.0015+.18*melt);
  float camera=3.4;
  float aspect=uResolution.x/uResolution.y;
- vec2 ndc=p.xy*2.7/(camera-p.z)/vec2(aspect,1.);
+ float framing=aspect<.85?2.1:2.7;
+ vec2 ndc=p.xy*framing/(camera-p.z)/vec2(aspect,1.);
  // True screen-space distance, corrected for aspect, parts the fluid around a cursor trail.
  vec2 push=vec2(0.);
  if(uMousePower>.005)for(int i=0;i<6;i++){
@@ -62,7 +63,7 @@ void main(){
  }
  p.xy+=push*vec2(1.,1.)*.85;
  p.z+=length(push)*.32;
- ndc=p.xy*2.7/(camera-p.z)/vec2(aspect,1.);
+ ndc=p.xy*framing/(camera-p.z)/vec2(aspect,1.);
  gl_Position=vec4(ndc,p.z*.08,1.);
 
  gl_PointSize=clamp((1.34+.45*melt)*sqrt(280000./uCount)*uPixelRatio*3.4/(camera-p.z),.65,2.8);
