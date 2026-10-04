@@ -2,8 +2,10 @@
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
+const segments=['8,3 40,3 44,7 40,11 8,11 4,7','43,10 47,14 47,40 43,44 39,40 39,14','43,48 47,52 47,78 43,82 39,78 39,52','8,81 40,81 44,85 40,89 8,89 4,85','5,48 9,52 9,78 5,82 1,78 1,52','5,10 9,14 9,40 5,44 1,40 1,14','8,42 40,42 44,46 40,50 8,50 4,46'];
+const digitSegments:Record<string,string>={'0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc','8':'abcdefg','9':'abcdfg','—':'g'};
 function ClockNumber({value,reduce}:{value:string;reduce:boolean|null}) {
- return <span className="clock-number-text" aria-label={value}>{value.split('').map((digit,index)=><span className="clock-digit-window" key={index}><motion.span key={digit} initial={reduce?false:{y:'65%',opacity:0,filter:'blur(3px)'}} animate={{y:0,opacity:1,filter:'blur(0px)'}} transition={{duration:.42,ease:[.22,1,.36,1]}}>{digit}</motion.span></span>)}</span>;
+ return <span className="segment-number" role="img" aria-label={value}>{value.split('').map((digit,index)=><svg key={index} className="segment-digit" viewBox="0 0 48 92" aria-hidden="true">{segments.map((points,s)=><motion.polygon key={s} points={points} fill="currentColor" initial={false} animate={{opacity:digitSegments[digit].includes('abcdefg'[s])?1:.045}} transition={{duration:reduce?0:.28,ease:'easeOut'}}/>)}</svg>)}</span>;
 }
 // Countdown to the announced release date, midnight in India (not a showtime).
 const releaseAt = Date.parse('2027-03-05T00:00:00+05:30');
