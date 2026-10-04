@@ -129,12 +129,12 @@ export default function ParticleOfficer(){
     surface!.dataset.pose=JSON.stringify(pose);surface!.dataset.particles=String(pointCount);surface!.dataset.formation=formation.toFixed(2);surface!.dataset.mousePower=cursor.power.toFixed(2);
    }raf=requestAnimationFrame(frame);
   }catch(error){console.error('Particle portrait unavailable:',error);setFailed(true);setReady(false)}};
-  image.onerror=()=>{setFailed(true);setReady(false)};image.src='/assets/prabhas-cosmic-identity.png';
+  image.onerror=()=>{setFailed(true);setReady(false)};image.src='/assets/prabhas-cosmic-spirit-look.png';
   return()=>{disposed=true;cancelAnimationFrame(raf);observer.disconnect();image.onload=image.onerror=null;surface.removeEventListener('webglcontextlost',contextLost);surface.removeEventListener('webglcontextrestored',contextRestored);if(texture)gl.deleteTexture(texture);if(pointBuffer)gl.deleteBuffer(pointBuffer);if(vao)gl.deleteVertexArray(vao);if(program)gl.deleteProgram(program);shaders.forEach(s=>gl.deleteShader(s))};
  },[reduce,epoch]);
  function pointer(e:PointerEvent<HTMLElement>){if(e.pointerType==='touch')return;const rect=e.currentTarget.getBoundingClientRect();mouse.current={x:(e.clientX-rect.left)/rect.width*2-1,y:1-(e.clientY-rect.top)/rect.height*2,active:1,stamp:performance.now()}}
  return <section ref={root} className="particle-officer" aria-label="Interactive Prabhas cosmic constellation portrait" onPointerMove={pointer} onPointerLeave={()=>{mouse.current.active=0}}>
-  <img className={`particle-fallback ${ready&&!reduce?'is-hidden':''}`} src="/assets/prabhas-cosmic-identity.png" alt="AI-generated Prabhas cosmic concept: translucent white constellation figure, looking upward left with a relaxed arm holding a bottle" loading="lazy"/>
+  <img className={`particle-fallback ${ready&&!reduce?'is-hidden':''}`} src="/assets/prabhas-cosmic-spirit-look.png" alt="AI-generated Prabhas cosmic concept: translucent white constellation figure, with long wavy hair, a full beard and relaxed empty hands" loading="lazy"/>
   <canvas ref={canvas} className={`particle-canvas ${ready&&!reduce?'is-ready':''}`} aria-label="Animated particles forming Prabhas; move your pointer across the portrait to part the particles" role="img"/>
   <div className="particle-topline"><span>SPIRIT / A NEW DIMENSION</span><span>{ready&&!reduce?new Intl.NumberFormat('en-IN').format(count)+' PARTICLES':'THE CONSTELLATION PORTRAIT'}</span></div>
   <div className="particle-editorial"><span className="eyebrow">PRABHAS · CELESTIAL PRESENCE</span><h2>FROM DUST.<br/><em>TO PRESENCE.</em></h2><p>{reduce||failed?'A new portrait of commanding presence.':'Move through the field. Set the stars in motion.'}</p></div>

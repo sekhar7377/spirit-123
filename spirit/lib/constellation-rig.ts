@@ -25,7 +25,7 @@ vec3 skin(vec3 p,vec2 uv){
  p.x+=(uv.x-.615)*uPose.w*1.5*chest;
  p.z+=uPose.w*chest;
  p.y+=uPose.w*.35*chest;
- // Hand and bottle belong to the source portrait; preserve their uninterrupted surface.
+ // Relaxed hand belongs to the source portrait; preserve its uninterrupted surface.
  float arm=(1.-smoothstep(.50,.53,uv.x))*(1.-smoothstep(.45,.64,uv.y));
  vec3 shoulder=portraitPoint(vec2(.505,.65));
  p=mix(p,shoulder+rz(p-shoulder,uPose.z),arm);
