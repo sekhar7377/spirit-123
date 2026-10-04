@@ -67,10 +67,10 @@ void main(){
  gl_Position=vec4(ndc,p.z*.08,1.);
 
  float faceDetail=exp(-pow((uv.x-.62)/.095,2.)-pow((uv.y-.78)/.14,2.));
- gl_PointSize=clamp((1.34+.45*melt)*mix(1.,.83,faceDetail)*sqrt(280000./uCount)*uPixelRatio*3.4/(camera-p.z),.65,2.8);
+ gl_PointSize=clamp((1.34+.45*melt)*mix(1.,.70,faceDetail)*sqrt(280000./uCount)*uPixelRatio*3.4/(camera-p.z),.65,2.8);
  vec3 bronze=vec3(.90,.94,1.);
  // Retain eye sockets, nose planes and mouth shading instead of washing the face white.
- vec3 shaded=mix(pow(tex.rgb,vec3(.60))*1.3,pow(tex.rgb,vec3(.90))*1.12,faceDetail);
+ vec3 shaded=mix(pow(tex.rgb,vec3(.60))*1.3,pow(tex.rgb,vec3(1.02))*1.04,faceDetail);
  vColor=mix(bronze,shaded,.42+.58*uFormation);
  float border=smoothstep(0.,.10,uv.x)*smoothstep(0.,.10,1.-uv.x)*smoothstep(0.,.07,uv.y)*smoothstep(0.,.07,1.-uv.y);
  float pulse=1.+.07*sin(uTime*.8+uv.y*9.);
@@ -88,7 +88,7 @@ const smooth=(a:number,b:number,x:number)=>{const t=Math.max(0,Math.min(1,(x-a)/
 
 export default function ParticleOfficer(){
  const root=useRef<HTMLElement>(null),canvas=useRef<HTMLCanvasElement>(null),mouse=useRef({x:4,y:4,active:0,stamp:0}),pausedRef=useRef(false),resetRef=useRef(false);
- const reduce=useReducedMotion(),[ready,setReady]=useState(false),[paused,setPaused]=useState(false),[count,setCount]=useState(0),[phase,setPhase]=useState('Gathering starlight'),[failed,setFailed]=useState(false),[epoch,setEpoch]=useState(0);
+ const prefersReduced=useReducedMotion(),[enableMotion,setEnableMotion]=useState(false),reduce=prefersReduced&&!enableMotion,[ready,setReady]=useState(false),[paused,setPaused]=useState(false),[count,setCount]=useState(0),[phase,setPhase]=useState('Gathering starlight'),[failed,setFailed]=useState(false),[epoch,setEpoch]=useState(0);
  useEffect(()=>{
   if(reduce)return;
   const surface=canvas.current,section=root.current;if(!surface||!section)return;
@@ -98,7 +98,7 @@ export default function ParticleOfficer(){
   let program:WebGLProgram|null=null,texture:WebGLTexture|null=null,vao:WebGLVertexArrayObject|null=null,pointBuffer:WebGLBuffer|null=null;
   const shaders:WebGLShader[]=[];
   const compact=matchMedia('(max-width:700px)').matches;
-  let pointCount=compact?110000:280000,adapted=compact;
+  let pointCount=compact?180000:360000,adapted=false;
   const cursor={x:4,y:4,power:0},trail=new Float32Array(12).fill(4);
   function compile(type:number,source:string){const shader=gl!.createShader(type);if(!shader)throw Error('Shader unavailable');shaders.push(shader);gl!.shaderSource(shader,source);gl!.compileShader(shader);if(!gl!.getShaderParameter(shader,gl!.COMPILE_STATUS))throw Error(gl!.getShaderInfoLog(shader)||'Shader compile failed');return shader}
   const image=new Image();
@@ -115,7 +115,7 @@ export default function ParticleOfficer(){
    function frame(now:number){raf=requestAnimationFrame(frame);if(disposed||!visible||document.hidden){previous=0;lastDraw=0;return}
     const dt=previous?Math.min((now-previous)/1000,.08):0;previous=now;
     if(resetRef.current){time=0;resetRef.current=false}if(!pausedRef.current)time+=dt;
-    const dpr=Math.min(devicePixelRatio,compact?1.25:1.5),width=Math.round(section!.clientWidth*dpr),height=Math.round(section!.clientHeight*dpr);
+    const dpr=Math.min(devicePixelRatio,compact?1.75:1.75),width=Math.round(section!.clientWidth*dpr),height=Math.round(section!.clientHeight*dpr);
     if(surface!.width!==width||surface!.height!==height){surface!.width=width;surface!.height=height;gl!.viewport(0,0,width,height)}
     const cycle=0;
     const formation=time<6?smooth(.6,5.8,time):cycle<19?1:cycle<23?1-smooth(19,23,cycle):smooth(23,28,cycle);
@@ -124,7 +124,7 @@ export default function ParticleOfficer(){
     for(let i=5;i>0;i--){trail[i*2]+=(trail[(i-1)*2]-trail[i*2])*.22;trail[i*2+1]+=(trail[(i-1)*2+1]-trail[i*2+1])*.22}trail[0]=cursor.x;trail[1]=cursor.y;
     const pose=poseAt(time);gl!.useProgram(program);gl!.uniform4f(uniforms.uPose,pose.yaw,pose.nod,pose.arm,pose.breath);gl!.uniform2f(uniforms.uBody,pose.sway,pose.turn);gl!.uniform2f(uniforms.uResolution,width,height);gl!.uniform1f(uniforms.uCount,pointCount);gl!.uniform1f(uniforms.uTime,time);gl!.uniform1f(uniforms.uFormation,formation);gl!.uniform2f(uniforms.uMouse,cursor.x,cursor.y);gl!.uniform1f(uniforms.uMousePower,cursor.power);gl!.uniform2f(uniforms.uVelocity,Math.max(-1,Math.min(1,vx*8)),Math.max(-1,Math.min(1,vy*8)));gl!.uniform2fv(uniforms['uTrail[0]'],trail);gl!.uniform1f(uniforms.uPixelRatio,dpr);gl!.clear(gl!.COLOR_BUFFER_BIT);gl!.drawArrays(gl!.POINTS,0,pointCount+STAR_PARTICLES);
     // Adapt only after a sustained slow sample, keeping UI responsive on integrated GPUs.
-    if(lastDraw&&time>7&&!adapted){totalFrame+=now-lastDraw;frames++;if(frames>=100){if(totalFrame/frames>42){pointCount=160000;adapted=true;setCount(pointCount)}frames=0;totalFrame=0}}lastDraw=now;
+    if(lastDraw&&time>7&&!adapted){totalFrame+=now-lastDraw;frames++;if(frames>=100){if(totalFrame/frames>42){pointCount=compact?100000:220000;adapted=true;setCount(pointCount)}frames=0;totalFrame=0}}lastDraw=now;
     if(dt>0){renderSamples++;renderTotal+=dt;if(renderSamples===60){surface!.dataset.fps=String(Math.round(renderSamples/renderTotal));renderSamples=0;renderTotal=0}}
     surface!.dataset.pose=JSON.stringify(pose);surface!.dataset.particles=String(pointCount);surface!.dataset.formation=formation.toFixed(2);surface!.dataset.mousePower=cursor.power.toFixed(2);
    }raf=requestAnimationFrame(frame);
@@ -132,12 +132,12 @@ export default function ParticleOfficer(){
   image.onerror=()=>{setFailed(true);setReady(false)};image.src='/assets/prabhas-cosmic-spirit-look.png';
   return()=>{disposed=true;cancelAnimationFrame(raf);observer.disconnect();image.onload=image.onerror=null;surface.removeEventListener('webglcontextlost',contextLost);surface.removeEventListener('webglcontextrestored',contextRestored);if(texture)gl.deleteTexture(texture);if(pointBuffer)gl.deleteBuffer(pointBuffer);if(vao)gl.deleteVertexArray(vao);if(program)gl.deleteProgram(program);shaders.forEach(s=>gl.deleteShader(s))};
  },[reduce,epoch]);
- function pointer(e:PointerEvent<HTMLElement>){if(e.pointerType==='touch')return;const rect=e.currentTarget.getBoundingClientRect();mouse.current={x:(e.clientX-rect.left)/rect.width*2-1,y:1-(e.clientY-rect.top)/rect.height*2,active:1,stamp:performance.now()}}
- return <section ref={root} className="particle-officer" aria-label="Interactive Prabhas cosmic constellation portrait" onPointerMove={pointer} onPointerLeave={()=>{mouse.current.active=0}}>
+ function pointer(e:PointerEvent<HTMLElement>){const rect=e.currentTarget.getBoundingClientRect();mouse.current={x:(e.clientX-rect.left)/rect.width*2-1,y:1-(e.clientY-rect.top)/rect.height*2,active:1,stamp:performance.now()}}
+ return <section ref={root} className={`particle-officer ${enableMotion?'motion-enabled':''}`} aria-label="Interactive Prabhas cosmic constellation portrait" onPointerDown={pointer} onPointerMove={pointer} onPointerUp={()=>{mouse.current.active=0}} onPointerCancel={()=>{mouse.current.active=0}} onPointerLeave={()=>{mouse.current.active=0}}>
   <img className={`particle-fallback ${ready&&!reduce?'is-hidden':''}`} src="/assets/prabhas-cosmic-spirit-look.png" alt="AI-generated Prabhas cosmic concept: translucent white constellation figure, with long wavy hair, a full beard and relaxed empty hands" loading="lazy"/>
   <canvas ref={canvas} className={`particle-canvas ${ready&&!reduce?'is-ready':''}`} aria-label="Animated particles forming Prabhas; move your pointer across the portrait to part the particles" role="img"/>
   <div className="particle-topline"><span>SPIRIT / A NEW DIMENSION</span><span>{ready&&!reduce?new Intl.NumberFormat('en-IN').format(count)+' PARTICLES':'THE CONSTELLATION PORTRAIT'}</span></div>
   <div className="particle-editorial"><span className="eyebrow">PRABHAS · CELESTIAL PRESENCE</span><h2>FROM DUST.<br/><em>TO PRESENCE.</em></h2><p>{reduce||failed?'A new portrait of commanding presence.':'Move through the field. Set the stars in motion.'}</p></div>
-  <div className="particle-bottom"><span className="particle-phase">{reduce||failed?'AI-GENERATED FAN ARTWORK':phase}</span><div className="particle-controls">{!reduce&&!failed&&<><button onClick={()=>{resetRef.current=true;pausedRef.current=false;setPaused(false)}}>Reform portrait ↗</button><button aria-pressed={paused} onClick={()=>{pausedRef.current=!paused;setPaused(!paused)}}>{paused?'Resume motion':'Pause motion'}</button></>}<span>AI-GENERATED FAN CONCEPT</span></div></div>
+  <div className="particle-bottom"><span className="particle-phase">{reduce||failed?'AI-GENERATED FAN ARTWORK':phase}</span><div className="particle-controls">{reduce&&<button onClick={()=>setEnableMotion(true)}>Enable interactive motion ↗</button>}{!reduce&&!failed&&<><button onClick={()=>{resetRef.current=true;pausedRef.current=false;setPaused(false)}}>Reform portrait ↗</button><button aria-pressed={paused} onClick={()=>{pausedRef.current=!paused;setPaused(!paused)}}>{paused?'Resume motion':'Pause motion'}</button></>}<span>AI-GENERATED FAN CONCEPT</span></div></div>
  </section>
 }
