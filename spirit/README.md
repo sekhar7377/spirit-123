@@ -35,3 +35,6 @@ The police section is replaced by prabhas-cosmic-portrait.png: a clean-shaven, s
 
 ## Articulated particle motion
 The live renderer now uses image-derived weighted neck and arm pivots, chest expansion, and coordinated body sway. A parametric rounded-square bottle shares the wrist transform. Portrait particles retain the source likeness; this is a shallow volumetric reconstruction, not a scanned full 3D human. Reduced-motion fallback remains a still. Adaptive particle sizes preserve brightness at lower GPU densities.
+
+## Refined constellation surface
+The current asset is `public/assets/prabhas-cosmic-refined.png`, generated with the built-in ImageGen tool using the preceding cosmic artwork and supplied first-look portrait as references. The bottle-holding pose is part of the source; the renderer no longer rotates a cutout forearm across the torso. Weighted deterministic sampling prioritizes the facial region and luminous anatomy instead of filling a rectangular grid. Desktop renders 280,000 useful surface points, adapting to 160,000 under sustained load; mobile starts at 110,000. Small rotations, breathing and cursor scattering animate the actual point surface. The reconstruction remains shallow and image-derived.
