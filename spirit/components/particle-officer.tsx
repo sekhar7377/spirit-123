@@ -80,6 +80,7 @@ in float vAlpha;
 out vec4 color;
 void main(){float d=length(gl_PointCoord-.5);float edge=1.-smoothstep(.28,.5,d);if(edge<.01)discard;color=vec4(vColor,vAlpha*edge);}`;
 const smooth=(a:number,b:number,x:number)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
+const portraitAsset=`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/assets/prabhas-cosmic-portrait.png`;
 
 export default function ParticleOfficer(){
  const root=useRef<HTMLElement>(null),canvas=useRef<HTMLCanvasElement>(null),mouse=useRef({x:4,y:4,active:0,stamp:0}),pausedRef=useRef(false),resetRef=useRef(false);
@@ -124,12 +125,12 @@ export default function ParticleOfficer(){
     surface!.dataset.pose=JSON.stringify(pose);surface!.dataset.particles=String(gridX*gridY);surface!.dataset.formation=formation.toFixed(2);surface!.dataset.mousePower=cursor.power.toFixed(2);
    }raf=requestAnimationFrame(frame);
   }catch(error){console.error('Particle portrait unavailable:',error);setFailed(true);setReady(false)}};
-  image.onerror=()=>{setFailed(true);setReady(false)};image.src='/assets/prabhas-cosmic-portrait.png';
+  image.onerror=()=>{setFailed(true);setReady(false)};image.src=portraitAsset;
   return()=>{disposed=true;cancelAnimationFrame(raf);observer.disconnect();image.onload=image.onerror=null;surface.removeEventListener('webglcontextlost',contextLost);surface.removeEventListener('webglcontextrestored',contextRestored);if(texture)gl.deleteTexture(texture);if(vao)gl.deleteVertexArray(vao);if(program)gl.deleteProgram(program);shaders.forEach(s=>gl.deleteShader(s))};
  },[reduce,epoch]);
  function pointer(e:PointerEvent<HTMLElement>){if(e.pointerType==='touch')return;const rect=e.currentTarget.getBoundingClientRect();mouse.current={x:(e.clientX-rect.left)/rect.width*2-1,y:1-(e.clientY-rect.top)/rect.height*2,active:1,stamp:performance.now()}}
  return <section ref={root} className="particle-officer" aria-label="Interactive Prabhas cosmic constellation portrait" onPointerMove={pointer} onPointerLeave={()=>{mouse.current.active=0}}>
-  <img className={`particle-fallback ${ready&&!reduce?'is-hidden':''}`} src="/assets/prabhas-cosmic-portrait.png" alt="AI-generated Prabhas cosmic concept: translucent white constellation figure, looking upward left with one hand resting across his stomach" loading="lazy"/>
+  <img className={`particle-fallback ${ready&&!reduce?'is-hidden':''}`} src={portraitAsset} alt="AI-generated Prabhas cosmic concept: translucent white constellation figure, looking upward left with one hand resting across his stomach" loading="lazy"/>
   <canvas ref={canvas} className={`particle-canvas ${ready&&!reduce?'is-ready':''}`} aria-label="Animated particles forming Prabhas; move your pointer across the portrait to part the particles" role="img"/>
   <div className="particle-topline"><span>SPIRIT / A NEW DIMENSION</span><span>{ready&&!reduce?new Intl.NumberFormat('en-IN').format(count)+' PARTICLES':'THE CONSTELLATION PORTRAIT'}</span></div>
   <div className="particle-editorial"><span className="eyebrow">PRABHAS · CELESTIAL PRESENCE</span><h2>FROM DUST.<br/><em>TO PRESENCE.</em></h2><p>{reduce||failed?'A new portrait of commanding presence.':'Move through the field. Set the stars in motion.'}</p></div>
