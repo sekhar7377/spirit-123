@@ -8,9 +8,8 @@ export function samplePortrait(data: Uint8ClampedArray, width: number, height: n
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const pixel = y * width + x, i = pixel * 4, l = light(i);
     const edge = Math.abs(l - light((y * width + Math.max(0, x - 1)) * 4));
-    const face = Math.exp(-((x / width - .62) ** 2 / .009 + (y / height - .22) ** 2 / .02));
-    const grip = Math.exp(-((x / width - .455) ** 2 / .0025 + (y / height - .84) ** 2 / .008));
-    total += l > .025 ? (.12 + Math.sqrt(l) * .8 + edge * 2) * (1 + face * 5 + grip * 3) : 0;
+    const face = Math.exp(-((x / width - .43) ** 2 / .009 + (y / height - .41) ** 2 / .02));
+    total += l > .025 ? (.12 + Math.sqrt(l) * .8 + edge * 2) * (1 + face * 5) : 0;
     cumulative[pixel] = total;
   }
   if (!total) throw new Error('Portrait has no visible sampling surface');

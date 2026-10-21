@@ -7,7 +7,7 @@ import ReleaseCountdown from './release-countdown';
 
 const ASSET=`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/assets/`;
 const chapters=[['film','The film'],['cast','The presence'],['theatre','The sound'],['gallery','The archive']];
-const cast=[{name:'Prabhas',role:'INDIA’S BIGGEST SUPERSTAR',src:'first-look-clean.png',position:'43% 18%'},{name:'Triptii Dimri',role:'LEADING CAST',src:'triptii-spirit.jpeg',position:'62% 28%'},{name:'Vivek Oberoi',role:'LEADING CAST',src:'vivek-clean.png',position:'46% 12%'}];
+const cast=[{name:'Prabhas',role:'INDIA’S BIGGEST SUPERSTAR',src:'prabhas-presence-october-2026.png',position:'50% 25%'},{name:'Triptii Dimri',role:'LEADING CAST',src:'triptii-spirit.jpeg',position:'62% 28%'},{name:'Vivek Oberoi',role:'LEADING CAST',src:'vivek-clean.png',position:'46% 12%'}];
 const posters=[{src:'first-look-clean.png',name:'The first look',credit:'Prabhas · Triptii Dimri'},{src:'vivek-clean.png',name:'A different shade',credit:'Vivek Oberoi'},{src:'release-hq.jpg',name:'The announcement',credit:'Spirit · World release'}];
 const star='0,-44 11,-15 42,-14 18,6 26,36 0,20 -26,36 -18,6 -42,-14 -11,-15';
 function Title({red=false,className=''}:{red?:boolean;className?:string}) {

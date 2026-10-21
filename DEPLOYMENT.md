@@ -15,3 +15,14 @@ The GitHub Pages workflow uses the same source with
 `NEXT_PUBLIC_BASE_PATH=/spirit-123`.
 
 Files outside `spirit/` belonging to other local projects are not part of this site.
+
+## Source reconciliation, October 22, 2026
+
+The current hosted Spirit site is Sites version 37, source commit
+`a9e3787691151ef64c51425debe602b95835928e`. Its October photographic
+surface/particle renderer and `prabhas-celestial-profile.jpg` supersede the older
+long-haired cosmic artwork. Source and deployed assets were recovered from the
+Site repository, not reconstructed from the outdated local checkout.
+
+Before future edits, compare the hosted Site version with this checkout and
+retrieve newer hosted source first. Do not publish an older local copy over it.

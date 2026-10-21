@@ -16,21 +16,19 @@ uniform vec2 uBody;
 vec3 rz(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}
 vec3 ry(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x+s*p.z,p.y,-s*p.x+c*p.z);}
 vec3 rx(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(p.x,c*p.y-s*p.z,s*p.y+c*p.z);}
-vec3 portraitPoint(vec2 uv){return vec3((uv.x-(uResolution.x<uResolution.y?.61:.54))*2.0*uImageAspect,(uv.y-.5)*2.0+.08,0.);}
+vec3 portraitPoint(vec2 uv){
+ bool compact=uResolution.x<uResolution.y;
+ return vec3((uv.x-.5)*2.*uImageAspect+(compact?0.:.9),(uv.y-.5)*2.+(compact?.20:.08),0.);
+}
 vec3 skin(vec3 p,vec2 uv){
- float head=smoothstep(.66,.77,uv.y);
- vec3 neck=portraitPoint(vec2(.622,.69));
- p=mix(p,neck+ry(rx(p-neck,uPose.y),uPose.x),head);
- float chest=exp(-pow((uv.y-.49)/.20,2.))*exp(-pow((uv.x-.61)/.13,2.));
- p.x+=(uv.x-.615)*uPose.w*1.5*chest;
+ // This source is a side-profile bust: move the head and shoulders as one surface.
+ vec3 neck=portraitPoint(vec2(.52,.43));
+ float head=smoothstep(.40,.53,uv.y);
+ p=mix(p,neck+ry(rx(p-neck,uPose.y*.45),uPose.x*.5),head);
+ float chest=exp(-pow((uv.y-.27)/.20,2.));
  p.z+=uPose.w*chest;
- p.y+=uPose.w*.35*chest;
- // Relaxed hand belongs to the source portrait; preserve its uninterrupted surface.
- float arm=(1.-smoothstep(.50,.53,uv.x))*(1.-smoothstep(.45,.64,uv.y));
- vec3 shoulder=portraitPoint(vec2(.505,.65));
- p=mix(p,shoulder+rz(p-shoulder,uPose.z),arm);
- vec3 hip=portraitPoint(vec2(.615,.24));
- p=hip+ry(p-hip,uBody.y);p.x+=uBody.x;
+ p.y+=uPose.w*.25*chest;
+ p=neck+ry(p-neck,uBody.y*.4);p.x+=uBody.x*.5;
  return p;
 }
 `;
