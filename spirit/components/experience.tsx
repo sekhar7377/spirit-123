@@ -5,7 +5,7 @@ import Lenis from '@studio-freight/lenis';
 import ParticleOfficer from './particle-officer';
 import ReleaseCountdown from './release-countdown';
 
-const ASSET='/assets/';
+const ASSET=`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/assets/`;
 const chapters=[['film','The film'],['cast','The presence'],['theatre','The sound'],['gallery','The archive']];
 const cast=[{name:'Prabhas',role:'INDIA’S BIGGEST SUPERSTAR',src:'first-look-clean.png',position:'43% 18%'},{name:'Triptii Dimri',role:'LEADING CAST',src:'triptii-spirit.jpeg',position:'62% 28%'},{name:'Vivek Oberoi',role:'LEADING CAST',src:'vivek-clean.png',position:'46% 12%'}];
 const posters=[{src:'first-look-clean.png',name:'The first look',credit:'Prabhas · Triptii Dimri'},{src:'vivek-clean.png',name:'A different shade',credit:'Vivek Oberoi'},{src:'release-hq.jpg',name:'The announcement',credit:'Spirit · World release'}];
